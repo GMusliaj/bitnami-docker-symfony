@@ -26,6 +26,15 @@ ENV BITNAMI_APP_NAME="symfony" \
     SYMFONY_PROJECT_NAME="myapp" \
     SYMFONY_SKIP_DB=""
 
+# Install yarn dependencies
+RUN apt-get update
+RUN apt-get install -y apt-utils --no-install-recommends patch
+RUN curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+RUN apt-get install -y nodejs
+RUN apt remove cmdtest
+RUN apt remove yarn
+RUN npm install -g yarn
+
 EXPOSE 8000
 
 WORKDIR /app
